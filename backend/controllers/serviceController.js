@@ -1,10 +1,10 @@
-const Service = require("../models/serviceModel");
+const ServiceRepository = require("../db/repositories/serviceRepository");
 const mongoose = require("mongoose")
 
 class ServiceController {
     static async getAllServices(req, res) {
         try{
-            const services = await Service.find({}).sort({createdAt: -1});
+            const { services } = await ServiceRepository.getAllServices();
             res.status(200).json(services);
         } catch(error){
             res.status(400).json({error: error.message});
@@ -12,10 +12,11 @@ class ServiceController {
     }
 
     static async addService(req, res) {
-        const {title, description, aproxFinishTime, cost} = req.body;
-
+        const data = req.body;
+        const user = req.user;
+        const serviceData = {...data, user_id: user._id}
         try{
-            const service = await Service.create({title, description, aproxFinishTime, cost});
+            const service = await ServiceRepository.save(serviceData);
             res.status(200).json(service);
         } catch(error){
             res.status(400).json({error: error.message});
@@ -28,7 +29,7 @@ class ServiceController {
             return res.status(404).json({error: "Service not found"});
         }
         try{
-            const service = await Service.findById(id);
+            const service = await ServiceRepository.getServiceById(id);
             res.status(200).json(service);
         } catch(error){
             res.status(404).json({error: "Service not found"});
@@ -41,7 +42,7 @@ class ServiceController {
             return res.status(404).json({error: "Service not found"});
         }
         try{
-            const service = await Service.findOneAndDelete({_id: id});
+            const service = await ServiceRepository.deleteService(id);
             res.status(200).json(service);
         } catch(error){
             res.status(404).json({error: "Service not found"});
@@ -50,14 +51,33 @@ class ServiceController {
 
     static async updateService(req, res) {
         const { id } = req.params
+        const data = req.body
         if(!mongoose.Types.ObjectId.isValid(id)){
             return res.status(404).json({error: "Service not found"});
         }
         try{
-            const service = await Service.findOneAndUpdate({_id: id}, {
-                ...req.body
-            });
+            const service = await ServiceRepository.updateService(data, id);
             res.status(200).json(service);
+        } catch(error){
+            res.status(404).json({error: "Service not found"});
+        }
+    }
+
+    static async getServicesByCategory(req, res){
+        const { category } = req.body;
+        try{
+            const { services } = await ServiceRepository.getServicesByCategory(category);
+            res.status(200).json(services);
+        } catch(error){
+            res.status(404).json({error: "Service not found"});
+        }
+    }
+
+    static async getServicesByTitle(req, res){
+        const { title } = req.body;
+        try{
+            const { services } = await ServiceRepository.getServicesByTitle(title);
+            res.status(200).json(services);
         } catch(error){
             res.status(404).json({error: "Service not found"});
         }

@@ -19,7 +19,17 @@ const serviceSchema = new Schema({
     cost:{
         type: Number,
         required: true,
+        min: 0,
         default: 0
+    },
+    category:{
+        type: String,
+        required: true,
+        lowercase: true,
+        enum: ["design", "development", "marketing", "business"]
+    },
+    user_id:{
+        type: String
     }
 }, { timestamps: true });
 

@@ -1,17 +1,14 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+const Helpers = require("../utilities/Helpers");
 
 class UserController{
-    static createToken (_id, email) {
-       jwt.sign({_id, email},process.env.TOKEN_SECRET_STRING, {expiresIn: "3d"});
-    }
-
     static async loginUser (req, res) {
         const {email, password} = req.body;
         try{
             const user = await User.login(email, password);
-
-            const token = this.createToken(user._id, user.email);
+            const token = Helpers.createToken(user._id, user.email);
+            req.user = user._id;
 
             res.status(200).json({email, token});
         } catch (error){
@@ -25,7 +22,7 @@ class UserController{
         try{
             const user = await User.register(firstName, lastName, email, password, role);
 
-            const token = this.createToken(user._id, user.email);
+            const token = Helpers.createToken(user._id, user.email);
 
             res.status(200).json({email, token});
         } catch (error){
