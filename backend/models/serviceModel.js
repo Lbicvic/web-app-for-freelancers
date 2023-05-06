@@ -29,7 +29,8 @@ const serviceSchema = new Schema({
         enum: ["design", "development", "marketing", "business"]
     },
     user_id:{
-        type: String
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 

@@ -28,7 +28,13 @@ class ServiceRepository {
   
       return { services };
     }
+
+    static async getServicesByUserID(user_id) {
+      const services = await Service.find({ user_id }).sort({createdAt : -1});
   
+      return { services };
+    }
+
     static async getServiceByTitle(title) {
       const services = await Service.find({ title: { $regex: title, $options: "i" } }).sort({createdAt : -1});
   

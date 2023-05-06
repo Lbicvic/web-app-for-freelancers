@@ -73,6 +73,16 @@ class ServiceController {
         }
     }
 
+    static async getServicesByUserID(req, res){
+        const user = req.user;
+        try{
+            const { services }  = await ServiceRepository.getServicesByUserID(user._id);
+            res.status(200).json(services);
+        } catch(error){
+            res.status(404).json({error: "Service not found"});
+        }
+    }
+
     static async getServicesByTitle(req, res){
         const { title } = req.body;
         try{
