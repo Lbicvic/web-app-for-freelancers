@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const Helpers = require("../utilities/Helpers");
+const UserRepository = require("../db/repositories/userRepository");
 
 class UserController{
     static async loginUser (req, res) {
@@ -25,6 +26,22 @@ class UserController{
             const token = Helpers.createToken(user._id, user.email);
 
             res.status(200).json({email, token});
+        } catch (error){
+            res.status(400).json({error: error.message});
+        }
+    }
+
+    static async getCurrentUser (req, res) {
+        const { authorization } = req.headers;
+
+        if(!authorization){
+            return res.status(401).json({error: "Authorization required"});
+        }
+        const token = authorization.split(" ")[1];
+        try{
+            const { _id } = jwt.decode(token);
+            const {firstName, lastName, email, role} = await UserRepository.getUserById(_id);
+            res.status(200).json({firstName, lastName, email, role});
         } catch (error){
             res.status(400).json({error: error.message});
         }

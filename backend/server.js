@@ -1,5 +1,5 @@
-const express = require('express');
-require('dotenv').config();
+const express = require("express");
+require("dotenv").config();
 const { connect } = require("./db/connection");
 const apiRouter = require("./routes/apiRouter");
 
@@ -10,9 +10,9 @@ app.use(express.json());
 app.use(apiRouter);
 
 (async function () {
-    await connect();
+  await connect();
 
-    app.listen(PORT, () => {
-        console.log(`listening port ${PORT}`);
-    });
+  app.listen(PORT, () => {
+    console.log(`listening port ${PORT}`);
+  });
 })();

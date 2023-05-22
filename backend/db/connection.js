@@ -15,4 +15,4 @@ mongoose.connection.on("error", (error) => {
   console.error(error);
 });
 
-module.exports = {connect};
+module.exports = { connect };

@@ -13,6 +13,4 @@ serviceRouter.delete("/:id", ServiceController.deleteService);
 serviceRouter.patch("/:id", ServiceController.updateService);
 serviceRouter.post("/categories", ServiceController.getServicesByCategory);
 
-
-
 module.exports = serviceRouter;
