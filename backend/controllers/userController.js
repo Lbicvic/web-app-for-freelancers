@@ -40,8 +40,8 @@ class UserController{
         const token = authorization.split(" ")[1];
         try{
             const { _id } = jwt.decode(token);
-            const {firstName, lastName, email, role} = await UserRepository.getUserById(_id);
-            res.status(200).json({firstName, lastName, email, role});
+            const {firstName, lastName, email, skills, role} = await UserRepository.getUserById(_id);
+            res.status(200).json({firstName, lastName, email, skills, role});
         } catch (error){
             res.status(400).json({error: error.message});
         }
