@@ -28,6 +28,7 @@ const userSchema = new Schema(
       required: true,
       enum: ["freelancer", "user"],
       default: "user",
+      lowercase: true,
     },
     skills: {
       type: String,
