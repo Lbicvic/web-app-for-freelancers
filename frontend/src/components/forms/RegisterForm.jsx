@@ -9,10 +9,10 @@ const RegisterForm = () => {
   const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const roleRef = useRef();
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
   const { setCurrentUser } = useContext(AuthContext);
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -22,29 +22,28 @@ const RegisterForm = () => {
       lastName: lastNameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
-      role: roleRef.current.value,
+      role: role,
     };
 
-    const response = await axios
+    await axios
       .post("http://localhost:3003/api/user/register", JSON.stringify(user), {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       })
-      .then(() => {
+      .then((response) => {
         setError("");
+        setCurrentUser(response.data);
+        localStorage.setItem("user", JSON.stringify(response));
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.response.data);
-        setError(error.response.data);
+        setError(error.response.data.error);
       });
-
-    setCurrentUser(response.data);
-    localStorage.setItem("user", JSON.stringify(response));
-    navigate("/");
   }
 
   return (
-    <section className="register_form">
+    <section className="register-form">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -84,29 +83,30 @@ const RegisterForm = () => {
           ref={passwordRef}
           required
         />
+        <div
+          className="register-form__radio-buttons"
+          onChange={(e) => {setRole(e.target.value)}}
+        >
+          <input
+            className="role"
+            type="radio"
+            id="roleFreelancer"
+            name="role"
+            value={"FreeLancer"}
+            required
+          />
+          <label htmlFor="roleFreelancer">Freelancer</label>
 
-        <input
-          className="role"
-          type="radio"
-          id="roleFreelancer"
-          name="role"
-          value={"FreeLancer"}
-          ref={roleRef}
-          required
-        />
-        <label forhtml="roleFreelancer">Freelancer</label>
-
-        <input
-          className="role"
-          type="radio"
-          id="roleUser"
-          name="role"
-          value={"User"}
-          ref={roleRef}
-          required
-        />
-        <label forhtml="roleUser">User</label>
-
+          <input
+            className="role"
+            type="radio"
+            id="roleUser"
+            name="role"
+            value={"User"}
+            required
+          />
+          <label htmlFor="roleUser">User</label>
+        </div>
         <button type="submit">Register</button>
         {error && <div className="error"> {error} </div>}
       </form>
