@@ -1,29 +1,51 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-    const navigate = useNavigate();
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        navigate("/login")
-    }
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
-    return (
-        <header>
-            <div className="header__title">
-                <Link to="/">
-                    <h2>Freelance</h2>
-                </Link>
-                <nav>
-                    <div className="nav__links">
-                        <Link to="/login"> Login </Link>
-                        <Link to="/register">Register</Link>
-                    </div>
-                    <button onClick={handleLogout}>Log out</button>
-                </nav>
+  return (
+    <header>
+      {!localStorage.getItem("user") && (
+        <div className="header__content">
+          <div className="header__title">
+            <Link to="/">
+              <h2>Freelance</h2>
+            </Link>
+          </div>
+          <nav>
+            <div className="nav__links">
+              <div>
+                <Link to="/login"> Login </Link>
+                <Link to="/register">Register</Link>
+              </div>
             </div>
-        </header>
-    )
-}
+          </nav>
+        </div>
+      )}
+      {localStorage.getItem("user") && (
+        <div className="header__content">
+          <div className="header__title">
+            <Link to="/home">
+              <h2>Freelance</h2>
+            </Link>
+          </div>
+          <nav>
+            <div className="nav__links">
+              <div>
+                <Link to="/myProfile"> Profile </Link>
+              </div>
+            </div>
+            <button onClick={handleLogout}>Log out</button>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
 
-export default Navbar
+export default Navbar;

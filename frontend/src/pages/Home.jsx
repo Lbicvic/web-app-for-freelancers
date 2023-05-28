@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div className="home">
       <Header />
-      <p>Welcome to the Freelance assisting app</p>
+      <p>You are sucessfully logged in !</p>
     </div>
   );
 };

@@ -28,8 +28,8 @@ const LoginForm = () => {
       .then((response) => {
         setError("");
         setCurrentUser(response.data);
-        localStorage.setItem("user", JSON.stringify(response));
-        navigate("/");
+        localStorage.setItem("user", JSON.stringify(response.data));
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error.response.data);

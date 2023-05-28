@@ -13,6 +13,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   const { setCurrentUser } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const [sucessStatus, setSucessStatus] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -32,18 +33,24 @@ const RegisterForm = () => {
       })
       .then((response) => {
         setError("");
+        setSucessStatus("Register completed");
         setCurrentUser(response.data);
-        localStorage.setItem("user", JSON.stringify(response));
-        navigate("/");
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
       })
       .catch((error) => {
         console.log(error.response.data);
+        setSucessStatus("");
         setError(error.response.data.error);
       });
   }
 
   return (
     <section className="register-form">
+      {sucessStatus && (
+        <div className="register-form__completed"> {sucessStatus} </div>
+      )}
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -85,7 +92,9 @@ const RegisterForm = () => {
         />
         <div
           className="register-form__radio-buttons"
-          onChange={(e) => {setRole(e.target.value)}}
+          onChange={(e) => {
+            setRole(e.target.value);
+          }}
         >
           <input
             className="role"
