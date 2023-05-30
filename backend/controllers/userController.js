@@ -11,7 +11,7 @@ class UserController{
             const token = Helpers.createToken(user._id, user.email);
             req.user = user._id;
 
-            res.status(200).json({email, token});
+            res.status(200).json({role: user._doc.role, token});
         } catch (error){
             res.status(400).json({error: error.message});
         }
@@ -25,7 +25,7 @@ class UserController{
 
             const token = Helpers.createToken(user._id, user.email);
 
-            res.status(200).json({email, token});
+            res.status(200).json({role: user._doc.role, token});
         } catch (error){
             res.status(400).json({error: error.message});
         }

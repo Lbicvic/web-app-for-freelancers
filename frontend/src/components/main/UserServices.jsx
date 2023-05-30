@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import Header from "../Header";
-import Service from "../main/Service";
+import Service from "./Service";
+import AuthContext from "../context/AuthContext";
 
-const CategoryServices = () => {
-  const location = useLocation();
+const UserServices = () => {
+  const { currentUser } = useContext(AuthContext);
   const [services, setServices] = useState([]);
-  const { state } = location;
 
   useEffect(() => {
     axios
       .post(
-        "http://localhost:3003/api/services/categories",
-        JSON.stringify({ category: state }),
+        "http://localhost:3003/api/services/myServices",
+        JSON.stringify( currentUser ),
         {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
@@ -25,11 +23,10 @@ const CategoryServices = () => {
       .catch((err) => {
         console.log(err.response.data);
       });
-  }, [state]);
+  }, [currentUser]);
 
   return (
     <>
-      <Header />
       <ul>
         {services.map((service) => {
           return (
@@ -41,4 +38,4 @@ const CategoryServices = () => {
   );
 };
 
-export default CategoryServices;
+export default UserServices;

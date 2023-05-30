@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import axios from "axios";
 
-axios.defaults.headers.common = {
-  authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
-};
+if (localStorage.getItem("user")) {
+  axios.defaults.headers.common = {
+    authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
+  };
+}
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -14,6 +16,7 @@ import Home from "./pages/Home";
 import CategoryServices from "./components/category/CategoryServices";
 import AuthContext from "./components/context/AuthContext";
 import UserProfile from "./pages/UserProfile";
+import MyServices from "./pages/MyServices";
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
@@ -44,10 +47,8 @@ function App() {
             path="/categoryServices"
             element={<CategoryServices />}
           ></Route>
-          <Route
-            path="/myProfile"
-            element={<UserProfile />}
-          ></Route>
+          <Route path="/myProfile" element={<UserProfile />}></Route>
+          <Route path="/myServices" element={<MyServices />}></Route>
         </Routes>
       </Router>
     </>
