@@ -1,10 +1,11 @@
 import Header from "../components/Header";
+import Categories from "../components/main/Categories";
 
 const Home = () => {
   return (
     <div className="home">
       <Header />
-      <p>You are sucessfully logged in !</p>
+      <Categories/>
     </div>
   );
 };

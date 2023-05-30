@@ -17,12 +17,10 @@ const Navbar = () => {
               <h2>Freelance</h2>
             </Link>
           </div>
-          <nav>
+          <nav className="nav">
             <div className="nav__links">
-              <div>
-                <Link to="/login"> Login </Link>
-                <Link to="/register">Register</Link>
-              </div>
+              <Link to="/login"> Login </Link>
+              <Link to="/register">Register</Link>
             </div>
           </nav>
         </div>
@@ -34,11 +32,9 @@ const Navbar = () => {
               <h2>Freelance</h2>
             </Link>
           </div>
-          <nav>
+          <nav className="nav">
             <div className="nav__links">
-              <div>
-                <Link to="/myProfile"> Profile </Link>
-              </div>
+              <Link to="/myProfile"> Profile </Link>
             </div>
             <button onClick={handleLogout}>Log out</button>
           </nav>

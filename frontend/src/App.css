@@ -1,42 +1,91 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 64.063rem;
+  width: 100%;
+  max-width: clamp(64.063rem, calc(59.522rem + 35.105vw), 97.5rem);
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.home {
+  height: calc(100% - 75px);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header__content {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.nav,
+.nav__links {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.card {
-  padding: 2em;
+.login-form,
+.register-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.read-the-docs {
-  color: #888;
+.login-form__wrapper,
+.register-form__wrapper {
+  max-width: 37.5rem;
+  width: 100%;
+}
+
+.login-form__wrapper form,
+.register-form__wrapper form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+}
+
+.login-form__wrapper input,
+.register-form__wrapper input {
+  width: 100%;
+}
+
+.register-form__radio-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.register-form__radio-buttons input {
+  width: auto;
+}
+
+.categories {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.categories__wrapper {
+  max-width: 64.063rem;
+  width: 100%;
+  max-width: clamp(64.063rem, calc(59.522rem + 35.105vw), 97.5rem);
+  margin-left: auto;
+  margin-right: auto;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.category__item {
+  padding: 0 1.5rem;
+  cursor: pointer;
 }

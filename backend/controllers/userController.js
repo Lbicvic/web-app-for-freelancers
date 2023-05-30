@@ -41,7 +41,7 @@ class UserController{
         try{
             const { _id } = jwt.decode(token);
             const {firstName, lastName, email, skills, role} = await UserRepository.getUserById(_id);
-            res.status(200).json({firstName, lastName, email, skills, role});
+            res.status(200).json({_id, firstName, lastName, email, skills, role});
         } catch (error){
             res.status(400).json({error: error.message});
         }

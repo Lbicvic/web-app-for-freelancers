@@ -26,7 +26,7 @@ const RegisterForm = () => {
       role: role,
     };
 
-    await axios
+    axios
       .post("http://localhost:3003/api/user/register", JSON.stringify(user), {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
@@ -48,77 +48,79 @@ const RegisterForm = () => {
 
   return (
     <section className="register-form">
-      {sucessStatus && (
-        <div className="register-form__completed"> {sucessStatus} </div>
-      )}
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="firstName"
-          type="text"
-          id="firstName"
-          name="firstName"
-          placeholder="First name"
-          ref={firstNameRef}
-          required
-        />
-        <input
-          className="lastName"
-          type="text"
-          id="lastName"
-          name="lastName"
-          placeholder="Last name"
-          ref={lastNameRef}
-          required
-        />
-        <input
-          className="email"
-          type="text"
-          id="email"
-          name="email"
-          placeholder="Email"
-          ref={emailRef}
-          required
-        />
-        <input
-          className="password"
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password"
-          autoComplete="on"
-          ref={passwordRef}
-          required
-        />
-        <div
-          className="register-form__radio-buttons"
-          onChange={(e) => {
-            setRole(e.target.value);
-          }}
-        >
+      <div className="register-form__wrapper">
+        {sucessStatus && (
+          <div className="register-form__completed"> {sucessStatus} </div>
+        )}
+        <h2>Register</h2>
+        <form onSubmit={handleSubmit}>
           <input
-            className="role"
-            type="radio"
-            id="roleFreelancer"
-            name="role"
-            value={"FreeLancer"}
+            className="firstName"
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder="First name"
+            ref={firstNameRef}
             required
           />
-          <label htmlFor="roleFreelancer">Freelancer</label>
+          <input
+            className="lastName"
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder="Last name"
+            ref={lastNameRef}
+            required
+          />
+          <input
+            className="email"
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Email"
+            ref={emailRef}
+            required
+          />
+          <input
+            className="password"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            autoComplete="on"
+            ref={passwordRef}
+            required
+          />
+          <div
+            className="register-form__radio-buttons"
+            onChange={(e) => {
+              setRole(e.target.value);
+            }}
+          >
+            <input
+              className="role"
+              type="radio"
+              id="roleFreelancer"
+              name="role"
+              value={"FreeLancer"}
+              required
+            />
+            <label htmlFor="roleFreelancer">Freelancer</label>
 
-          <input
-            className="role"
-            type="radio"
-            id="roleUser"
-            name="role"
-            value={"User"}
-            required
-          />
-          <label htmlFor="roleUser">User</label>
-        </div>
-        <button type="submit">Register</button>
-        {error && <div className="error"> {error} </div>}
-      </form>
+            <input
+              className="role"
+              type="radio"
+              id="roleUser"
+              name="role"
+              value={"User"}
+              required
+            />
+            <label htmlFor="roleUser">User</label>
+          </div>
+          <button type="submit">Register</button>
+          {error && <div className="error"> {error} </div>}
+        </form>
+      </div>
     </section>
   );
 };

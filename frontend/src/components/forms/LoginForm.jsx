@@ -20,7 +20,7 @@ const LoginForm = () => {
       password: passwordRef.current.value,
     };
 
-    await axios
+    axios
       .post("http://localhost:3003/api/user/login", JSON.stringify(user), {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
@@ -39,30 +39,32 @@ const LoginForm = () => {
 
   return (
     <section className="login-form">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="email"
-          type="text"
-          id="email"
-          name="email"
-          placeholder="Email"
-          ref={emailRef}
-          required
-        />
-        <input
-          className="password"
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password"
-          autoComplete="on"
-          ref={passwordRef}
-          required
-        />
-        <button type="submit">Login</button>
-        {error && <div className="error"> {error} </div>}
-      </form>
+      <div className="login-form__wrapper">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            className="email"
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Email"
+            ref={emailRef}
+            required
+          />
+          <input
+            className="password"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            autoComplete="on"
+            ref={passwordRef}
+            required
+          />
+          <button type="submit">Login</button>
+          {error && <div className="error"> {error} </div>}
+        </form>
+      </div>
     </section>
   );
 };
