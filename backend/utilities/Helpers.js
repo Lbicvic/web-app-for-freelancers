@@ -6,6 +6,10 @@ class Helpers {
       expiresIn: "3d",
     });
   }
+  static getUserDataForResponse(user) {
+    const { _id, firstName, lastName, email, role, skills} = user;
+    return { _id, firstName, lastName, email, role, skills};
+  }
 }
 
 module.exports = Helpers;

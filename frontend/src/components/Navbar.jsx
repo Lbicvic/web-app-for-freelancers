@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "./context/AuthContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -37,6 +40,7 @@ const Navbar = () => {
               {JSON.parse(localStorage.getItem("user")).role ==
                 "freelancer" && (
                 <>
+                  <Link to="/newService"> Post New Service </Link>
                   <Link to="/myServices"> My Services </Link>
                 </>
               )}

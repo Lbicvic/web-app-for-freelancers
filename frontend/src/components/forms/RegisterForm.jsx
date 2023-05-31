@@ -34,9 +34,14 @@ const RegisterForm = () => {
       .then((response) => {
         setError("");
         setSucessStatus("Register completed");
-        setCurrentUser(response.data);
+        setCurrentUser(response.data.userData);
+        const userDetails = {
+          role: response.data.userData.role,
+          token: response.data.token,
+        };
+        localStorage.setItem("user", JSON.stringify(userDetails));
         setTimeout(() => {
-          navigate("/login");
+          navigate("/home");
         }, 3000);
       })
       .catch((error) => {

@@ -27,8 +27,12 @@ const LoginForm = () => {
       })
       .then((response) => {
         setError("");
-        setCurrentUser(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data));
+        setCurrentUser(response.data.userData);
+        const userDetails = {
+          role: response.data.userData.role,
+          token: response.data.token,
+        };
+        localStorage.setItem("user", JSON.stringify(userDetails));
         navigate("/home");
       })
       .catch((error) => {

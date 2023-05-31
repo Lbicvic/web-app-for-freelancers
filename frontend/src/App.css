@@ -28,20 +28,23 @@
 }
 
 .login-form,
-.register-form {
+.register-form,
+.service-form {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .login-form__wrapper,
-.register-form__wrapper {
+.register-form__wrapper,
+.service-form__wrapper {
   max-width: 37.5rem;
   width: 100%;
 }
 
 .login-form__wrapper form,
-.register-form__wrapper form {
+.register-form__wrapper form,
+.service-form__wrapper form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,18 +54,21 @@
 }
 
 .login-form__wrapper input,
-.register-form__wrapper input {
+.register-form__wrapper input,
+.service-form__wrapper input {
   width: 100%;
 }
 
-.register-form__radio-buttons {
+.register-form__radio-buttons,
+.service-form__radio-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
 }
 
-.register-form__radio-buttons input {
+.register-form__radio-buttons input,
+.service-form__radio-buttons input {
   width: auto;
 }
 

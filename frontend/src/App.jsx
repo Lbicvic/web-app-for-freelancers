@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import "./App.css";
 import axios from "axios";
-
-if (localStorage.getItem("user")) {
-  axios.defaults.headers.common = {
-    authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
-  };
-}
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -17,9 +16,16 @@ import CategoryServices from "./components/category/CategoryServices";
 import AuthContext from "./components/context/AuthContext";
 import UserProfile from "./pages/UserProfile";
 import MyServices from "./pages/MyServices";
+import NewService from "./pages/NewService";
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
+
+  if (localStorage.getItem("user")) {
+    axios.defaults.headers.common = {
+      authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
+    };
+  }
 
   useEffect(() => {
     axios
@@ -49,6 +55,7 @@ function App() {
           ></Route>
           <Route path="/myProfile" element={<UserProfile />}></Route>
           <Route path="/myServices" element={<MyServices />}></Route>
+          <Route path="/newService" element={<NewService />}></Route>
         </Routes>
       </Router>
     </>
