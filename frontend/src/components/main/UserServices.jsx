@@ -32,6 +32,9 @@ const UserServices = () => {
           return <Service {...service} key={service._id} />;
         })}
       </ul>
+      {services.length == 0 && (
+        <p>There are no available services for this category</p>
+      )}
     </>
   );
 };

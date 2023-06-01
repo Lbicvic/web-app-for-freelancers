@@ -44,6 +44,7 @@ const Navbar = () => {
                   <Link to="/myServices"> My Services </Link>
                 </>
               )}
+              <Link to="/applications"> Applications </Link>
               <Link to="/myProfile"> Profile </Link>
             </div>
             <button onClick={handleLogout}>Log out</button>

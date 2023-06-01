@@ -14,7 +14,7 @@ class ServiceController {
   static async addService(req, res) {
     const data = req.body;
     const user = req.user;
-    const serviceData = { ...data, user_id: user._id };
+    const serviceData = { ...data, user_id: user._id, user_name: user.firstName.concat(" ",user.lastName) };
     try {
       const service = await ServiceRepository.save(serviceData);
       res.status(200).json(service);

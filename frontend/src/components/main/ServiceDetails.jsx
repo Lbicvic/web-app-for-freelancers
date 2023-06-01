@@ -44,6 +44,33 @@ const ServiceDetails = () => {
     navigate("/updateService", { state: id });
   };
 
+  const hireFreelancer = async () => {
+    if (currentUser._id != service.user_id && currentUser.role == "user") {
+      const application = {
+        hire: "ongoing",
+        freelancer_id: service.user_id,
+        freelancer_name: service.user_name,
+        title: service.title,
+      };
+
+      axios
+        .post(
+          "http://localhost:3003/api/applications/",
+          JSON.stringify(application),
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((response) => {
+          navigate("/applications");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    }
+  };
+
   return (
     <>
       <Header />
@@ -53,6 +80,9 @@ const ServiceDetails = () => {
           <button onClick={() => updateService(service._id)}>Update</button>
           <button onClick={() => deleteService(service._id)}>Delete</button>
         </div>
+      )}
+      {currentUser.role == "user" && (
+        <button onClick={() => hireFreelancer()}>Hire</button>
       )}
     </>
   );

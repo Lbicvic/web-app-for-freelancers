@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
-const Service = ({ _id, title, description, cost }) => {
+const Service = ({ _id, title, description, cost, user_name, user_id }) => {
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
 
   const selectService = (serviceID) => {
     navigate("/serviceDetails", { state: serviceID });
@@ -16,6 +18,7 @@ const Service = ({ _id, title, description, cost }) => {
             <h3>{title}</h3>
             <p>{description}</p>
             <h4>{cost} €</h4>
+            {currentUser._id != user_id && <p>Owner: {user_name}</p>}
           </div>
         </div>
       </li>
