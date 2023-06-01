@@ -17,6 +17,8 @@ import AuthContext from "./components/context/AuthContext";
 import UserProfile from "./pages/UserProfile";
 import MyServices from "./pages/MyServices";
 import NewService from "./pages/NewService";
+import ServiceDetails from "./components/main/ServiceDetails";
+import UpdateService from "./pages/UpdateService";
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
@@ -55,6 +57,8 @@ function App() {
           ></Route>
           <Route path="/myProfile" element={<UserProfile />}></Route>
           <Route path="/myServices" element={<MyServices />}></Route>
+          <Route path="/serviceDetails" element={<ServiceDetails />}></Route>
+          <Route path="/updateService" element={<UpdateService />}></Route>
           <Route path="/newService" element={<NewService />}></Route>
         </Routes>
       </Router>

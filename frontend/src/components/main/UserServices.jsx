@@ -11,7 +11,7 @@ const UserServices = () => {
     axios
       .post(
         "http://localhost:3003/api/services/myServices",
-        JSON.stringify( currentUser ),
+        JSON.stringify(currentUser),
         {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
@@ -29,9 +29,7 @@ const UserServices = () => {
     <>
       <ul>
         {services.map((service) => {
-          return (
-            <Service {...service} key={service._id}/>
-          );
+          return <Service {...service} key={service._id} />;
         })}
       </ul>
     </>
