@@ -29,7 +29,7 @@ class ApplicationRepository {
     return { applications };
   }
 
-  static async updateService(application, applicationId) {
+  static async updateApplication(application, applicationId) {
     try {
       return await Application.findByIdAndUpdate(applicationId, application, {
         new: true,
@@ -39,7 +39,7 @@ class ApplicationRepository {
     }
   }
 
-  static async deleteService(applicationId) {
+  static async deleteApplication(applicationId) {
     return await Application.findOneAndDelete({ _id: applicationId });
   }
 }
