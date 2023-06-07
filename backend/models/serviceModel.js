@@ -33,10 +33,14 @@ const serviceSchema = new Schema(
       type: String,
       required: true,
     },
-    user_name:{
+    user_name: {
       type: String,
       required: true,
-    }
+    },
+    user_email: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

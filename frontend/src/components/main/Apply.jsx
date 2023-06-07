@@ -73,6 +73,19 @@ const Apply = () => {
         console.log(error);
       });
   };
+  const deleteApplication = (id) => {
+    axios
+      .delete(`http://localhost:3003/api/applications/${id}`, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        navigate("/applications");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  };
 
   return (
     <>
@@ -100,8 +113,14 @@ const Apply = () => {
                       <>
                         <p>
                           {application.freelancer_name} has accepted your
-                          application, please contact freelancer on this email
+                          application, please contact freelancer on this email{" "}
+                          {application.freelancer_email}
                         </p>
+                        <button
+                          onClick={() => deleteApplication(application._id)}
+                        >
+                          Delete
+                        </button>
                       </>
                     )}
                     {application.hire == "refuse" && (
@@ -110,6 +129,11 @@ const Apply = () => {
                           {application.freelancer_name} has refused your
                           application, please delete this application
                         </p>
+                        <button
+                          onClick={() => deleteApplication(application._id)}
+                        >
+                          Delete
+                        </button>
                       </>
                     )}
                   </div>
@@ -135,8 +159,14 @@ const Apply = () => {
                       <>
                         <p>
                           You have accepted {application.user_name} application,
-                          please contact user on this email
+                          please contact user on this email{" "}
+                          {application.user_email}
                         </p>
+                        <button
+                          onClick={() => deleteApplication(application._id)}
+                        >
+                          Delete
+                        </button>
                       </>
                     )}
                     {application.hire == "refuse" && (
@@ -145,6 +175,11 @@ const Apply = () => {
                           You have refused {application.user_name} application,
                           please delete this application
                         </p>
+                        <button
+                          onClick={() => deleteApplication(application._id)}
+                        >
+                          Delete
+                        </button>
                       </>
                     )}
                   </div>

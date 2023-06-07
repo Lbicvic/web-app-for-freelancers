@@ -18,11 +18,19 @@ const applicationSchema = new Schema(
       type: String,
       required: true,
     },
+    freelancer_email: {
+      type: String,
+      required: true,
+    },
     user_id: {
       type: String,
       required: true,
     },
     user_name: {
+      type: String,
+      required: true,
+    },
+    user_email: {
       type: String,
       required: true,
     },

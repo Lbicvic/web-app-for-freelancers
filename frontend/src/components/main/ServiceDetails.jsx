@@ -51,6 +51,7 @@ const ServiceDetails = () => {
         freelancer_id: service.user_id,
         freelancer_name: service.user_name,
         title: service.title,
+        freelancer_email: service.user_email,
       };
 
       axios
