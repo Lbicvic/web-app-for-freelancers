@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
 } from "react-router-dom";
 import "./App.css";
 import axios from "axios";
@@ -20,6 +19,7 @@ import NewService from "./pages/NewService";
 import ServiceDetails from "./components/main/ServiceDetails";
 import UpdateService from "./pages/UpdateService";
 import Applications from "./pages/Applications";
+import SearchedServices from "./components/search/SearchedServices";
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
@@ -62,6 +62,7 @@ function App() {
           <Route path="/updateService" element={<UpdateService />}></Route>
           <Route path="/newService" element={<NewService />}></Route>
           <Route path="/applications" element={<Applications />}></Route>
+          <Route path="/searchedServices" element={<SearchedServices />}></Route>
         </Routes>
       </Router>
     </>

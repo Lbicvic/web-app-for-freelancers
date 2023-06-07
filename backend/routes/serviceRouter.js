@@ -12,5 +12,6 @@ serviceRouter.post("/", ServiceController.addService);
 serviceRouter.delete("/:id", ServiceController.deleteService);
 serviceRouter.patch("/:id", ServiceController.updateService);
 serviceRouter.post("/categories", ServiceController.getServicesByCategory);
+serviceRouter.post("/searchByTitle", ServiceController.getServicesByTitle);
 
 module.exports = serviceRouter;

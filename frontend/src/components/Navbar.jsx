@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "./context/AuthContext";
+import Search from "./search/Search";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const Navbar = () => {
             </Link>
           </div>
           <nav className="nav">
+            <Search />
             <div className="nav__links">
               {JSON.parse(localStorage.getItem("user")).role ==
                 "freelancer" && (
