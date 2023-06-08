@@ -107,6 +107,11 @@ const Apply = () => {
                           waiting on {application.freelancer_name} to accept or
                           decline application
                         </p>
+                        <button
+                          onClick={() => deleteApplication(application._id)}
+                        >
+                          Delete
+                        </button>
                       </>
                     )}
                     {application.hire == "accept" && (
@@ -116,13 +121,6 @@ const Apply = () => {
                           application, please contact freelancer on this email{" "}
                           {application.freelancer_email}
                         </p>
-                        <div className="application__buttons">
-                          <button
-                            onClick={() => deleteApplication(application._id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
                       </>
                     )}
                     {application.hire == "refuse" && (
@@ -172,13 +170,6 @@ const Apply = () => {
                           please contact user on this email{" "}
                           {application.user_email}
                         </p>
-                        <div className="application__buttons">
-                          <button
-                            onClick={() => deleteApplication(application._id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
                       </>
                     )}
                     {application.hire == "refuse" && (

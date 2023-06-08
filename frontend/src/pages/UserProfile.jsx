@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
+import Profile from "../components/user/Profile";
 
 const UserProfile = () => {
   const [user, setUser] = useState([]);
@@ -20,28 +21,7 @@ const UserProfile = () => {
   return (
     <>
       <Header />
-      <div className="user">
-        <div className="user__wrapper">
-          <h2>Account Details</h2>
-          <div className="user__details">
-            <p>
-              First Name: <span>{user.firstName}</span>
-            </p>
-            <p>
-              Last Name: <span>{user.lastName}</span>
-            </p>
-            <p>
-              Email: <span>{user.email}</span>
-            </p>
-            <p>
-              Skills: <span>{user.skills}</span>
-            </p>
-            <p>
-              Role: <span>{user.role}</span>
-            </p>
-          </div>
-        </div>
-      </div>
+      <Profile user={user} key={user._id}/>
     </>
   );
 };

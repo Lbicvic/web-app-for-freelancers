@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const Service = ({
@@ -20,26 +20,34 @@ const Service = ({
 
   return (
     <>
-      <li className="service" key={_id} onClick={() => selectService(_id)}>
-        <div className="service__wrapper" key={_id}>
-          {is_details && (
+      {is_details && (
+        <li className="service" key={_id}>
+          <div className="service__wrapper" key={_id}>
             <div className={`service__content ${is_details}`}>
               <h3>{title}</h3>
               <p>{description}</p>
               <h4>{cost} €</h4>
-              {currentUser._id != user_id && <p>Owner: {user_name}</p>}
+              {currentUser._id != user_id && (
+                <Link to={`/profileDetails/${user_id}`}>
+                  <p>Owner: {user_name}</p>
+                </Link>
+              )}
             </div>
-          )}
-          {!is_details && (
+          </div>
+        </li>
+      )}
+      {!is_details && (
+        <li className="service" key={_id} onClick={() => selectService(_id)}>
+          <div className="service__wrapper" key={_id}>
             <div className="service__content">
               <h3>{title}</h3>
               <p>{description}</p>
               <h4>{cost} €</h4>
               {currentUser._id != user_id && <p>Owner: {user_name}</p>}
             </div>
-          )}
-        </div>
-      </li>
+          </div>
+        </li>
+      )}
     </>
   );
 };

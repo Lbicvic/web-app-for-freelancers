@@ -5,6 +5,7 @@ import AuthContext from "../context/AuthContext";
 
 const UserServices = () => {
   const { currentUser } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
   const [services, setServices] = useState([]);
 
   useEffect(() => {
@@ -18,22 +19,29 @@ const UserServices = () => {
         }
       )
       .then((response) => {
+        setIsLoading(false);
         setServices(response.data);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err.response.data);
       });
   }, [currentUser]);
 
   return (
     <>
-      <ul>
-        {services.map((service) => {
-          return <Service {...service} key={service._id} />;
-        })}
-      </ul>
-      {services.length == 0 && (
-        <p>There are no available services for this category</p>
+      {isLoading && <p className="text-center">Loading...</p>}
+      {!isLoading && (
+        <>
+          <ul>
+            {services.map((service) => {
+              return <Service {...service} key={service._id} />;
+            })}
+          </ul>
+          {services.length == 0 && (
+            <p>There are no available services for this category</p>
+          )}
+        </>
       )}
     </>
   );

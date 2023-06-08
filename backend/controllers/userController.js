@@ -31,7 +31,7 @@ class UserController {
 
       const token = Helpers.createToken(user._id, user.email);
       const responseData = Helpers.getUserDataForResponse(user);
-      
+
       res.status(200).json({ userData: responseData, token });
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -49,6 +49,17 @@ class UserController {
       const { _id } = jwt.decode(token);
       const { firstName, lastName, email, skills, role } =
         await UserRepository.getUserById(_id);
+      res.status(200).json({ _id, firstName, lastName, email, skills, role });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+
+  static async getUserById(req, res) {
+    const { user_id } = req.body;
+    try {
+      const { _id, firstName, lastName, email, skills, role } =
+        await UserRepository.getUserById(user_id);
       res.status(200).json({ _id, firstName, lastName, email, skills, role });
     } catch (error) {
       res.status(400).json({ error: error.message });

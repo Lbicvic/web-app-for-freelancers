@@ -83,7 +83,9 @@ const ServiceDetails = () => {
         </div>
       )}
       {currentUser.role == "user" && (
-        <button onClick={() => hireFreelancer()}>Hire</button>
+        <div className="hire-button">
+          <button onClick={() => hireFreelancer()}>Hire</button>
+        </div>
       )}
     </>
   );
