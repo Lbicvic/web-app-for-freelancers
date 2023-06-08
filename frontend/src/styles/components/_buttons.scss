@@ -1,0 +1,16 @@
+.register-form__radio-buttons,
+.service-form__radio-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.application__buttons,
+.update-delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}

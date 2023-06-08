@@ -75,7 +75,7 @@ const ServiceDetails = () => {
   return (
     <>
       <Header />
-      <Service {...service} key={service._id} />
+      <Service {...service} key={service._id} is_details={"is-details"} />
       {currentUser._id == service.user_id && (
         <div className="update-delete-button">
           <button onClick={() => updateService(service._id)}>Update</button>

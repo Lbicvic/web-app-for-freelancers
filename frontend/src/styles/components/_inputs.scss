@@ -1,0 +1,10 @@
+.login-form__wrapper input,
+.register-form__wrapper input,
+.service-form__wrapper input {
+  width: 100%;
+}
+
+.register-form__radio-buttons input,
+.service-form__radio-buttons input {
+  width: auto;
+}

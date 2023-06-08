@@ -1,0 +1,26 @@
+.service {
+  padding: 1rem 0;
+}
+
+.service__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.service__content {
+  @extend .card__layout;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.service__content.is-details {
+  cursor: default;
+}

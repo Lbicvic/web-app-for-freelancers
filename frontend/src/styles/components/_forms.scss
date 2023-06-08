@@ -1,0 +1,29 @@
+.login-form,
+.register-form,
+.service-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form__wrapper,
+.register-form__wrapper,
+.service-form__wrapper {
+  max-width: 37.5rem;
+  width: 100%;
+
+  h2 {
+    text-align: center;
+  }
+}
+
+.login-form__wrapper form,
+.register-form__wrapper form,
+.service-form__wrapper form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+}

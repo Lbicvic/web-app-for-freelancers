@@ -1,0 +1,14 @@
+.search__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3125rem;
+  flex-direction: row-reverse;
+}
+
+.search__box i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

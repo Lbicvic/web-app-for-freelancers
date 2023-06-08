@@ -1,0 +1,19 @@
+.application__wrapper {
+  @extend .layout;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.application__item {
+  @extend .card__layout;
+}
+
+.application__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+}

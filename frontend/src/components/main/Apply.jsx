@@ -116,11 +116,13 @@ const Apply = () => {
                           application, please contact freelancer on this email{" "}
                           {application.freelancer_email}
                         </p>
-                        <button
-                          onClick={() => deleteApplication(application._id)}
-                        >
-                          Delete
-                        </button>
+                        <div className="application__buttons">
+                          <button
+                            onClick={() => deleteApplication(application._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </>
                     )}
                     {application.hire == "refuse" && (
@@ -129,11 +131,13 @@ const Apply = () => {
                           {application.freelancer_name} has refused your
                           application, please delete this application
                         </p>
-                        <button
-                          onClick={() => deleteApplication(application._id)}
-                        >
-                          Delete
-                        </button>
+                        <div className="application__buttons">
+                          <button
+                            onClick={() => deleteApplication(application._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </>
                     )}
                   </div>
@@ -147,12 +151,18 @@ const Apply = () => {
                           {application.user_name} wants to hire you for this
                           service
                         </p>
-                        <button onClick={() => acceptApplication(application)}>
-                          Accept
-                        </button>
-                        <button onClick={() => declineApplication(application)}>
-                          Decline
-                        </button>
+                        <div className="application__buttons">
+                          <button
+                            onClick={() => acceptApplication(application)}
+                          >
+                            Accept
+                          </button>
+                          <button
+                            onClick={() => declineApplication(application)}
+                          >
+                            Decline
+                          </button>
+                        </div>
                       </>
                     )}
                     {application.hire == "accept" && (
@@ -162,11 +172,13 @@ const Apply = () => {
                           please contact user on this email{" "}
                           {application.user_email}
                         </p>
-                        <button
-                          onClick={() => deleteApplication(application._id)}
-                        >
-                          Delete
-                        </button>
+                        <div className="application__buttons">
+                          <button
+                            onClick={() => deleteApplication(application._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </>
                     )}
                     {application.hire == "refuse" && (
@@ -175,11 +187,13 @@ const Apply = () => {
                           You have refused {application.user_name} application,
                           please delete this application
                         </p>
-                        <button
-                          onClick={() => deleteApplication(application._id)}
-                        >
-                          Delete
-                        </button>
+                        <div className="application__buttons">
+                          <button
+                            onClick={() => deleteApplication(application._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </>
                     )}
                   </div>

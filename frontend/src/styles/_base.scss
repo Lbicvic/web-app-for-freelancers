@@ -1,0 +1,21 @@
+#root {
+  @extend .layout;
+}
+
+.home {
+  height: calc(100% - 75px);
+}
+
+ul,
+li {
+  padding-left: 0;
+  list-style: none;
+}
+
+.layout {
+  max-width: 64.063rem;
+  width: 100%;
+  max-width: clamp(64.063rem, calc(59.522rem + 35.105vw), 97.5rem);
+  margin-left: auto;
+  margin-right: auto;
+}
