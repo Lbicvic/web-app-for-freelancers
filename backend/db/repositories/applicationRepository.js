@@ -5,7 +5,11 @@ class ApplicationRepository {
     try {
       return await Application.create(application);
     } catch (error) {
-      return { error: error.message };
+      if (error.code == 11000) {
+        return { error: "You have already sent this application" };
+      } else {
+        return { error: error.message };
+      }
     }
   }
 
@@ -18,13 +22,17 @@ class ApplicationRepository {
   }
 
   static async getApplicationsByUserID(user_id) {
-    const applications = await Application.find({ user_id }).sort({ createdAt: -1 });
+    const applications = await Application.find({ user_id }).sort({
+      createdAt: -1,
+    });
 
     return { applications };
   }
 
   static async getApplicationsByFreelancerID(freelancer_id) {
-    const applications = await Application.find({ freelancer_id }).sort({ createdAt: -1 });
+    const applications = await Application.find({ freelancer_id }).sort({
+      createdAt: -1,
+    });
 
     return { applications };
   }

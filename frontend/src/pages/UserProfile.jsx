@@ -5,6 +5,7 @@ import Profile from "../components/user/Profile";
 
 const UserProfile = () => {
   const [user, setUser] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios
       .get("http://localhost:3003/api/user/getCurrentUser", {
@@ -12,16 +13,23 @@ const UserProfile = () => {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
+        setIsLoading(false);
         setUser(response.data);
       })
       .catch((error) => {
+        setIsLoading(true);
         console.log(error.response.data);
       });
   });
   return (
     <>
       <Header />
-      <Profile user={user} key={user._id}/>
+      {isLoading && <p className="text-center">Loading...</p>}
+      {!isLoading && (
+        <>
+          <Profile user={user} key={user._id} />
+        </>
+      )}
     </>
   );
 };

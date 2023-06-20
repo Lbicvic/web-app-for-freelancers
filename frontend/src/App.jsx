@@ -60,7 +60,7 @@ function App() {
           <Route path="/myProfile" element={<UserProfile />}></Route>
           <Route path="/profileDetails/:id" element={<ProfileDetails />}></Route>
           <Route path="/myServices" element={<MyServices />}></Route>
-          <Route path="/serviceDetails" element={<ServiceDetails />}></Route>
+          <Route path="/serviceDetails/:id" element={<ServiceDetails />}></Route>
           <Route path="/updateService" element={<UpdateService />}></Route>
           <Route path="/newService" element={<NewService />}></Route>
           <Route path="/applications" element={<Applications />}></Route>

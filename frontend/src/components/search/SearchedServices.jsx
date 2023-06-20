@@ -8,6 +8,7 @@ const SearchedServices = () => {
   const location = useLocation();
   const [services, setServices] = useState([]);
   const { state } = location;
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -20,9 +21,11 @@ const SearchedServices = () => {
         }
       )
       .then((response) => {
+        setIsLoading(false);
         setServices(response.data);
       })
       .catch((error) => {
+        setIsLoading(true);
         console.log(error.response.data);
       });
   }, [state]);
@@ -30,13 +33,20 @@ const SearchedServices = () => {
   return (
     <>
       <Header />
-      <ul>
-        {services.map((service) => {
-          return <Service {...service} key={service._id} />;
-        })}
-      </ul>
-      {services.length == 0 && (
-        <p>There are no available services by searched title</p>
+      {isLoading && <p className="text-center">Loading...</p>}
+      {!isLoading && (
+        <>
+          <ul>
+            {services.map((service) => {
+              return <Service {...service} key={service._id} />;
+            })}
+          </ul>
+          {services.length == 0 && (
+            <p className="text-center">
+              There are no available services by searched title
+            </p>
+          )}
+        </>
       )}
     </>
   );

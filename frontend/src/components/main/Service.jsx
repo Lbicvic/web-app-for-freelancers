@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const Service = ({
@@ -11,12 +11,7 @@ const Service = ({
   user_id,
   is_details,
 }) => {
-  const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
-
-  const selectService = (serviceID) => {
-    navigate("/serviceDetails", { state: serviceID });
-  };
 
   return (
     <>
@@ -37,16 +32,18 @@ const Service = ({
         </li>
       )}
       {!is_details && (
-        <li className="service" key={_id} onClick={() => selectService(_id)}>
-          <div className="service__wrapper" key={_id}>
-            <div className="service__content">
-              <h3>{title}</h3>
-              <p>{description}</p>
-              <h4>{cost} €</h4>
-              {currentUser._id != user_id && <p>Owner: {user_name}</p>}
+        <Link to={`/serviceDetails/${_id}`}>
+          <li className="service" key={_id}>
+            <div className="service__wrapper" key={_id}>
+              <div className="service__content">
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <h4>{cost} €</h4>
+                {currentUser._id != user_id && <p>Owner: {user_name}</p>}
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+        </Link>
       )}
     </>
   );

@@ -23,7 +23,7 @@ const UserServices = () => {
         setServices(response.data);
       })
       .catch((err) => {
-        setIsLoading(false);
+        setIsLoading(true);
         console.log(err.response.data);
       });
   }, [currentUser]);
@@ -39,7 +39,9 @@ const UserServices = () => {
             })}
           </ul>
           {services.length == 0 && (
-            <p>There are no available services for this category</p>
+            <p className="text-center">
+              There are no available services for this category
+            </p>
           )}
         </>
       )}

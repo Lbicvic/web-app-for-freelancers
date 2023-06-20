@@ -1,30 +1,34 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "../Header";
 import Service from "../main/Service";
 import AuthContext from "../context/AuthContext";
 
 const ServiceDetails = () => {
-  const location = useLocation();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [service, setService] = useState([]);
-  const { state } = location;
   const { currentUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3003/api/services/${state}`, {
+      .get(`http://localhost:3003/api/services/${id}`, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
+        setError("");
+        setIsLoading(false);
         setService(response.data);
       })
       .catch((err) => {
+        setIsLoading(true);
         console.log(err.response.data);
       });
-  }, [state]);
+  }, [id]);
 
   const deleteService = (id) => {
     axios
@@ -64,7 +68,12 @@ const ServiceDetails = () => {
           }
         )
         .then((response) => {
-          navigate("/applications");
+          if (response.data.error) {
+            setError(response.data.error);
+          } else {
+            setError("");
+            navigate("/applications");
+          }
         })
         .catch((error) => {
           console.log(error.response.data);
@@ -75,17 +84,23 @@ const ServiceDetails = () => {
   return (
     <>
       <Header />
-      <Service {...service} key={service._id} is_details={"is-details"} />
-      {currentUser._id == service.user_id && (
-        <div className="update-delete-button">
-          <button onClick={() => updateService(service._id)}>Update</button>
-          <button onClick={() => deleteService(service._id)}>Delete</button>
-        </div>
-      )}
-      {currentUser.role == "user" && (
-        <div className="hire-button">
-          <button onClick={() => hireFreelancer()}>Hire</button>
-        </div>
+      {isLoading && <p className="text-center">Loading...</p>}
+      {!isLoading && (
+        <>
+          <Service {...service} key={service._id} is_details={"is-details"} />
+          {currentUser._id == service.user_id && (
+            <div className="update-delete-button">
+              <button onClick={() => updateService(service._id)}>Update</button>
+              <button onClick={() => deleteService(service._id)}>Delete</button>
+            </div>
+          )}
+          {currentUser.role == "user" && (
+            <div className="hire-button">
+              <button onClick={() => hireFreelancer()}>Hire</button>
+            </div>
+          )}
+          {error && <p className="text-center"> {error} </p>}
+        </>
       )}
     </>
   );

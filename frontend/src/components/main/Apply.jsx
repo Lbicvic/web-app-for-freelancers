@@ -7,6 +7,7 @@ const Apply = () => {
   const { currentUser } = useContext(AuthContext);
   const [applications, setApplications] = useState([]);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (currentUser.role == "user") {
@@ -16,9 +17,11 @@ const Apply = () => {
           headers: { "Content-Type": "application/json" },
         })
         .then((response) => {
+          setIsLoading(false);
           setApplications(response.data);
         })
         .catch((err) => {
+          setIsLoading(true);
           console.log(err.response.data);
         });
     } else {
@@ -28,9 +31,11 @@ const Apply = () => {
           headers: { "Content-Type": "application/json" },
         })
         .then((response) => {
+          setIsLoading(false);
           setApplications(response.data);
         })
         .catch((err) => {
+          setIsLoading(true);
           console.log(err.response.data);
         });
     }
@@ -89,114 +94,117 @@ const Apply = () => {
 
   return (
     <>
-      <div className="application">
-        <div className="application__wrapper">
-          {applications.map((application, index) => {
-            return (
-              <div
-                className="application__item"
-                key={index}
-                id={application.title}
-              >
-                {currentUser.role == "user" && (
-                  <div className="application__details">
-                    <h3>{application.title}</h3>
-                    {application.hire == "ongoing" && (
-                      <>
-                        <p>
-                          waiting on {application.freelancer_name} to accept or
-                          decline application
-                        </p>
-                        <button
-                          onClick={() => deleteApplication(application._id)}
-                        >
-                          Delete
-                        </button>
-                      </>
-                    )}
-                    {application.hire == "accept" && (
-                      <>
-                        <p>
-                          {application.freelancer_name} has accepted your
-                          application, please contact freelancer on this email{" "}
-                          {application.freelancer_email}
-                        </p>
-                      </>
-                    )}
-                    {application.hire == "refuse" && (
-                      <>
-                        <p>
-                          {application.freelancer_name} has refused your
-                          application, please delete this application
-                        </p>
-                        <div className="application__buttons">
+      {isLoading && <p className="text-center">Loading...</p>}
+      {!isLoading && (
+        <div className="application">
+          <div className="application__wrapper">
+            {applications.map((application, index) => {
+              return (
+                <div
+                  className="application__item"
+                  key={index}
+                  id={application.title}
+                >
+                  {currentUser.role == "user" && (
+                    <div className="application__details">
+                      <h3>{application.title}</h3>
+                      {application.hire == "ongoing" && (
+                        <>
+                          <p>
+                            waiting on {application.freelancer_name} to accept
+                            or decline application
+                          </p>
                           <button
                             onClick={() => deleteApplication(application._id)}
                           >
                             Delete
                           </button>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
-                {currentUser.role == "freelancer" && (
-                  <div className="application__details">
-                    <h3>{application.title}</h3>
-                    {application.hire == "ongoing" && (
-                      <>
-                        <p>
-                          {application.user_name} wants to hire you for this
-                          service
-                        </p>
-                        <div className="application__buttons">
-                          <button
-                            onClick={() => acceptApplication(application)}
-                          >
-                            Accept
-                          </button>
-                          <button
-                            onClick={() => declineApplication(application)}
-                          >
-                            Decline
-                          </button>
-                        </div>
-                      </>
-                    )}
-                    {application.hire == "accept" && (
-                      <>
-                        <p>
-                          You have accepted {application.user_name} application,
-                          please contact user on this email{" "}
-                          {application.user_email}
-                        </p>
-                      </>
-                    )}
-                    {application.hire == "refuse" && (
-                      <>
-                        <p>
-                          You have refused {application.user_name} application,
-                          please delete this application
-                        </p>
-                        <div className="application__buttons">
-                          <button
-                            onClick={() => deleteApplication(application._id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-          {applications.length == 0 && (
-            <p>You have no applications available</p>
-          )}
+                        </>
+                      )}
+                      {application.hire == "accept" && (
+                        <>
+                          <p>
+                            {application.freelancer_name} has accepted your
+                            application, please contact freelancer on this email{" "}
+                            {application.freelancer_email}
+                          </p>
+                        </>
+                      )}
+                      {application.hire == "refuse" && (
+                        <>
+                          <p>
+                            {application.freelancer_name} has refused your
+                            application, please delete this application
+                          </p>
+                          <div className="application__buttons">
+                            <button
+                              onClick={() => deleteApplication(application._id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )}
+                  {currentUser.role == "freelancer" && (
+                    <div className="application__details">
+                      <h3>{application.title}</h3>
+                      {application.hire == "ongoing" && (
+                        <>
+                          <p>
+                            {application.user_name} wants to hire you for this
+                            service
+                          </p>
+                          <div className="application__buttons">
+                            <button
+                              onClick={() => acceptApplication(application)}
+                            >
+                              Accept
+                            </button>
+                            <button
+                              onClick={() => declineApplication(application)}
+                            >
+                              Decline
+                            </button>
+                          </div>
+                        </>
+                      )}
+                      {application.hire == "accept" && (
+                        <>
+                          <p>
+                            You have accepted {application.user_name}{" "}
+                            application, please contact user on this email{" "}
+                            {application.user_email}
+                          </p>
+                        </>
+                      )}
+                      {application.hire == "refuse" && (
+                        <>
+                          <p>
+                            You have refused {application.user_name}{" "}
+                            application, please delete this application
+                          </p>
+                          <div className="application__buttons">
+                            <button
+                              onClick={() => deleteApplication(application._id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            {applications.length == 0 && (
+              <p className="text-center">You have no applications available</p>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
