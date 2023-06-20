@@ -18,7 +18,7 @@ class UserController {
   }
 
   static async registerUser(req, res) {
-    const { firstName, lastName, email, password, role } = req.body;
+    const { firstName, lastName, email, password, role, profilePic } = req.body;
 
     try {
       const user = await User.register(
@@ -26,7 +26,8 @@ class UserController {
         lastName,
         email,
         password,
-        role
+        role,
+        profilePic,
       );
 
       const token = Helpers.createToken(user._id, user.email);
@@ -47,9 +48,9 @@ class UserController {
     const token = authorization.split(" ")[1];
     try {
       const { _id } = jwt.decode(token);
-      const { firstName, lastName, email, skills, role } =
+      const { firstName, lastName, email, skills, role, profilePicture } =
         await UserRepository.getUserById(_id);
-      res.status(200).json({ _id, firstName, lastName, email, skills, role });
+      res.status(200).json({ _id, firstName, lastName, email, skills, role, profilePicture  });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -58,9 +59,9 @@ class UserController {
   static async getUserById(req, res) {
     const { user_id } = req.body;
     try {
-      const { _id, firstName, lastName, email, skills, role } =
+      const { _id, firstName, lastName, email, skills, role, profilePicture } =
         await UserRepository.getUserById(user_id);
-      res.status(200).json({ _id, firstName, lastName, email, skills, role });
+      res.status(200).json({ _id, firstName, lastName, email, skills, role, profilePicture });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

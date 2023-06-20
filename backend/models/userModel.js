@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const cloudinary = require("../middleware/cloudinaryMiddleware");
 
 const Schema = mongoose.Schema;
 
@@ -34,6 +35,16 @@ const userSchema = new Schema(
       type: String,
       default: "Basic Knowledge",
     },
+    profilePicture: {
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
+    },
   },
   { timestamps: true }
 );
@@ -43,7 +54,8 @@ userSchema.statics.register = async function (
   lastName,
   email,
   password,
-  role
+  role,
+  profilePic
 ) {
   if (!firstName || !lastName || !email || !password || !role) {
     throw Error("Please fill all fields to continue");
@@ -65,12 +77,19 @@ userSchema.statics.register = async function (
 
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
+  const uploadPicture = await cloudinary.uploader.upload(profilePic, {
+    folder: "profiles",
+  });
   const user = await this.create({
     firstName,
     lastName,
     email,
     password: hashPassword,
     role,
+    profilePicture: {
+      public_id: uploadPicture.public_id,
+      url: uploadPicture.secure_url,
+    },
   });
 
   return user;

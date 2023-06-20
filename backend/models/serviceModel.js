@@ -12,11 +12,6 @@ const serviceSchema = new Schema(
       type: String,
       required: true,
     },
-    aproxFinishTime: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
     cost: {
       type: Number,
       required: true,
@@ -40,6 +35,16 @@ const serviceSchema = new Schema(
     user_email: {
       type: String,
       required: true,
+    },
+    picture: {
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
     },
   },
   { timestamps: true }

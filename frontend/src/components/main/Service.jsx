@@ -7,6 +7,7 @@ const Service = ({
   title,
   description,
   cost,
+  picture,
   user_name,
   user_id,
   is_details,
@@ -20,6 +21,7 @@ const Service = ({
           <div className="service__wrapper" key={_id}>
             <div className={`service__content ${is_details}`}>
               <h3>{title}</h3>
+              <img className="service__picture" src={picture.url} alt="Service Picture" />
               <p>{description}</p>
               <h4>{cost} €</h4>
               {currentUser._id != user_id && (

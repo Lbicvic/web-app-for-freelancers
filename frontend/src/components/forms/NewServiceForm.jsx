@@ -10,6 +10,14 @@ const NewServiceForm = () => {
   const [category, setCategory] = useState("");
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [picture, setPicture] = useState({});
+
+  const setFileToBase64 = async (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => setPicture(reader.result);
+    reader.onerror = (error) => console.log(error);
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -19,6 +27,7 @@ const NewServiceForm = () => {
       description: descriptionRef.current.value,
       cost: costRef.current.value,
       category: category,
+      picture: picture,
     };
 
     axios
@@ -41,6 +50,18 @@ const NewServiceForm = () => {
       <div className="service-form__wrapper">
         <h2>Post New Service</h2>
         <form onSubmit={handleSubmit}>
+          <label htmlFor="picture">Choose Picture:</label>
+          <input
+            className="picture"
+            type="file"
+            id="picture"
+            name="picture"
+            accept="image/*"
+            onChange={async (e) => {
+              await setFileToBase64(e.target.files[0]);
+            }}
+            required
+          />
           <input
             className="title"
             type="text"

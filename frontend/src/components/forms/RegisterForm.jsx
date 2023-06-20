@@ -10,10 +10,18 @@ const RegisterForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [role, setRole] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const navigate = useNavigate();
   const { setCurrentUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [sucessStatus, setSucessStatus] = useState("");
+
+  const setFileToBase64 = async (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => setProfilePicture(reader.result);
+    reader.onerror = (error) => console.log(error);
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -24,6 +32,7 @@ const RegisterForm = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
       role: role,
+      profilePic: profilePicture,
     };
 
     axios
@@ -40,9 +49,7 @@ const RegisterForm = () => {
           token: response.data.token,
         };
         localStorage.setItem("user", JSON.stringify(userDetails));
-        setTimeout(() => {
-          navigate("/home");
-        }, 3000);
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -122,6 +129,18 @@ const RegisterForm = () => {
             />
             <label htmlFor="roleUser">User</label>
           </div>
+          <label htmlFor="profile">Choose Profile Picture:</label>
+          <input
+            className="profile-picture"
+            type="file"
+            id="profilePicture"
+            name="profile"
+            accept="image/*"
+            onChange={async (e) => {
+              await setFileToBase64(e.target.files[0]);
+            }}
+            required
+          />
           <button type="submit">Register</button>
           {error && <div className="error"> {error} </div>}
         </form>

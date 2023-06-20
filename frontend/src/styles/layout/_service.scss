@@ -23,4 +23,12 @@
 
 .service__content.is-details {
   cursor: default;
+
+  .service__picture{
+    align-self: center;
+    width: auto;
+    height: 18.75rem;
+    object-fit: cover;
+    border-radius: .625rem;
+  }
 }

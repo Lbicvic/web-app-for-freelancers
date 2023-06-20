@@ -7,6 +7,7 @@ const Profile = ({user}) => {
         <div className="user__wrapper">
           <h2>Account Details</h2>
           <div className="user__details">
+            <img className="user__picture" src={user.profilePicture.url} alt="Profile Picture" />
             <p>
               First Name: <span>{user.firstName}</span>
             </p>

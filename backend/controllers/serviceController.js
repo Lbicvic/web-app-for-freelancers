@@ -1,5 +1,6 @@
 const ServiceRepository = require("../db/repositories/serviceRepository");
 const mongoose = require("mongoose");
+const cloudinary = require("../middleware/cloudinaryMiddleware");
 
 class ServiceController {
   static async getAllServices(req, res) {
@@ -12,10 +13,25 @@ class ServiceController {
   }
 
   static async addService(req, res) {
-    const data = req.body;
+    const { title, description, cost, category, picture } = req.body;
     const user = req.user;
-    const serviceData = { ...data, user_id: user._id, user_name: user.firstName.concat(" ",user.lastName), user_email: user.email };
     try {
+      const uploadPicture = await cloudinary.uploader.upload(picture, {
+        folder: "services",
+      });
+      const serviceData = {
+        title,
+        description,
+        cost,
+        category,
+        picture: {
+          public_id: uploadPicture.public_id,
+          url: uploadPicture.secure_url,
+        },
+        user_id: user._id,
+        user_name: user.firstName.concat(" ", user.lastName),
+        user_email: user.email,
+      };
       const service = await ServiceRepository.save(serviceData);
       res.status(200).json(service);
     } catch (error) {
