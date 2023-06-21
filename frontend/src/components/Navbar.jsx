@@ -40,7 +40,7 @@ const Navbar = () => {
             <Search />
             <div className="nav__links">
               {JSON.parse(localStorage.getItem("user")).role ==
-                "freelancer" && (
+                "Freelancer" && (
                 <>
                   <Link to="/newService"> Post New Service </Link>
                   <Link to="/myServices"> My Services </Link>

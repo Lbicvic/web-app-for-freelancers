@@ -105,7 +105,7 @@ const Apply = () => {
                   key={index}
                   id={application.title}
                 >
-                  {currentUser.role == "user" && (
+                  {currentUser.role == "User" && (
                     <div className="application__details">
                       <h3>{application.title}</h3>
                       {application.hire == "ongoing" && (
@@ -147,7 +147,7 @@ const Apply = () => {
                       )}
                     </div>
                   )}
-                  {currentUser.role == "freelancer" && (
+                  {currentUser.role == "Freelancer" && (
                     <div className="application__details">
                       <h3>{application.title}</h3>
                       {application.hire == "ongoing" && (

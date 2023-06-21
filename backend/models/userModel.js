@@ -27,11 +27,10 @@ const userSchema = new Schema(
     role: {
       type: String,
       required: true,
-      enum: ["freelancer", "user"],
-      default: "user",
-      lowercase: true,
+      enum: ["Freelancer", "User"],
+      default: "User",
     },
-    skills: {
+    occupation: {
       type: String,
       default: "Basic Knowledge",
     },
@@ -55,9 +54,18 @@ userSchema.statics.register = async function (
   email,
   password,
   role,
-  profilePic
+  profilePic,
+  occupation
 ) {
-  if (!firstName || !lastName || !email || !password || !role) {
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !password ||
+    !role ||
+    !profilePic ||
+    !occupation
+  ) {
     throw Error("Please fill all fields to continue");
   }
 
@@ -90,6 +98,7 @@ userSchema.statics.register = async function (
       public_id: uploadPicture.public_id,
       url: uploadPicture.secure_url,
     },
+    occupation,
   });
 
   return user;

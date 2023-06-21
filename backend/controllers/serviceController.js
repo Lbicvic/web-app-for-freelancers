@@ -59,6 +59,7 @@ class ServiceController {
     }
     try {
       const service = await ServiceRepository.deleteService(id);
+      await cloudinary.uploader.destroy(service.picture.public_id);
       res.status(200).json(service);
     } catch (error) {
       res.status(404).json({ error: "Service not found" });

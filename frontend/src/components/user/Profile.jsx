@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Profile = ({user}) => {
   return (
@@ -18,7 +18,7 @@ const Profile = ({user}) => {
               Email: <span>{user.email}</span>
             </p>
             <p>
-              Skills: <span>{user.skills}</span>
+              Occupation: <span>{user.occupation}</span>
             </p>
             <p>
               Role: <span>{user.role}</span>

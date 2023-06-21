@@ -24,6 +24,7 @@ const UpdateServiceForm = () => {
       .then((response) => {
         setIsLoading(false);
         setService(response.data);
+        setCategory(service.category);
       })
       .catch((err) => {
         setIsLoading(true);

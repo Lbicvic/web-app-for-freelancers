@@ -15,6 +15,7 @@ const RegisterForm = () => {
   const { setCurrentUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [sucessStatus, setSucessStatus] = useState("");
+  const occupationRef = useRef();
 
   const setFileToBase64 = async (file) => {
     const reader = new FileReader();
@@ -33,6 +34,7 @@ const RegisterForm = () => {
       password: passwordRef.current.value,
       role: role,
       profilePic: profilePicture,
+      occupation: occupationRef.current.value,
     };
 
     axios
@@ -114,7 +116,7 @@ const RegisterForm = () => {
               type="radio"
               id="roleFreelancer"
               name="role"
-              value={"FreeLancer"}
+              value={"Freelancer"}
               required
             />
             <label htmlFor="roleFreelancer">Freelancer</label>
@@ -129,6 +131,21 @@ const RegisterForm = () => {
             />
             <label htmlFor="roleUser">User</label>
           </div>
+          <label htmlFor="occupation">Choose an Occupation:</label>
+          <select name="occupation" id="occupation" ref={occupationRef}>
+            <option value="Frontend Developer">Frontend Developer</option>
+            <option value="Backend Developer">Backend Developer</option>
+            <option value="Fullstack Developer">Fullstack Developer</option>
+            <option value="DevOps Engineer">DevOps Engineer</option>
+            <option value="Android Developer">Android Developer</option>
+            <option value="Flutter Developer">Flutter Developer</option>
+            <option value="iOS Developer">iOS Developer</option>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="Hardware Engineer">Hardware Engineer</option>
+            <option value="Designer">Designer</option>
+            <option value="Photographer">Photographer</option>
+            <option value="Human Resources Tech">Human Resources Tech</option>
+          </select>
           <label htmlFor="profile">Choose Profile Picture:</label>
           <input
             className="profile-picture"
