@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 
@@ -132,7 +132,12 @@ const RegisterForm = () => {
             <label htmlFor="roleUser">User</label>
           </div>
           <label htmlFor="occupation">Choose an Occupation:</label>
-          <select name="occupation" id="occupation" ref={occupationRef}>
+          <select
+            name="occupation"
+            id="occupation"
+            className="occupation"
+            ref={occupationRef}
+          >
             <option value="Frontend Developer">Frontend Developer</option>
             <option value="Backend Developer">Backend Developer</option>
             <option value="Fullstack Developer">Fullstack Developer</option>
@@ -160,6 +165,9 @@ const RegisterForm = () => {
           />
           <button type="submit">Register</button>
           {error && <div className="error"> {error} </div>}
+          <p>
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
         </form>
       </div>
     </section>

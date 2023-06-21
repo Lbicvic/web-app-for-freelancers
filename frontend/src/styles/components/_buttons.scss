@@ -4,6 +4,11 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+
+  input,
+  label {
+    cursor: pointer;
+  }
 }
 
 .application__buttons,

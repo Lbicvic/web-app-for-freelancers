@@ -4,7 +4,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <Header />
-      <p>Welcome to the Freelance assisting app</p>
+      <p className="text-center">Welcome to the Freelance assisting app</p>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 
@@ -67,6 +67,9 @@ const LoginForm = () => {
           />
           <button type="submit">Login</button>
           {error && <div className="error"> {error} </div>}
+          <p>
+            Need an account? <Link to="/register">Register</Link>
+          </p>
         </form>
       </div>
     </section>

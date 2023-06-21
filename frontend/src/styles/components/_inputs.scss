@@ -1,10 +1,37 @@
 .login-form__wrapper input,
 .register-form__wrapper input,
-.service-form__wrapper input {
+.service-form__wrapper input,
+.occupation,
+.search__box {
   width: 100%;
+  padding: 0.3125rem;
+  border-radius: 0.3125rem;
+  border: 0.0625rem solid $color-light-gray;
+  box-shadow: 0.0625rem 0.0625rem 0.0625rem $color-light-gray;
+
+  &:hover {
+    box-shadow: 0.3125rem 0.3125rem 0.3125rem $color-light-gray;
+  }
 }
 
 .register-form__radio-buttons input,
 .service-form__radio-buttons input {
   width: auto;
+}
+
+.occupation {
+  width: 60%;
+  background: transparent;
+}
+
+.search__box {
+  input {
+    width: auto;
+    height: 1.875rem;
+    border: none;
+
+    &:focus {
+      outline: transparent;
+    }
+  }
 }
