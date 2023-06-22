@@ -5,6 +5,11 @@
   justify-content: center;
   align-items: center;
   margin: 0 3rem;
+
+  @include max-breakpoint($breakpoint-medium){
+    height: fit-content;
+    margin: 2rem 1rem;
+  }
 }
 .categories__wrapper {
   @extend .layout;
@@ -13,6 +18,11 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 4rem;
   text-align: center;
+
+  @include max-breakpoint($breakpoint-medium){
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }
 
 .category__item {

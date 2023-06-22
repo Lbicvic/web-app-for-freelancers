@@ -33,6 +33,10 @@ input[type="file"]::file-selector-button:focus-visible {
   label {
     cursor: pointer;
   }
+  @include max-breakpoint($breakpoint-medium){
+    flex-direction: column;
+    gap: .625rem;
+  }
 }
 
 .application__buttons,
@@ -44,3 +48,4 @@ input[type="file"]::file-selector-button:focus-visible {
   gap: 1rem;
   padding: 1rem 0;
 }
+

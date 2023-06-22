@@ -7,8 +7,79 @@
   gap: 1rem;
 }
 
+.nav {
+  @include max-breakpoint($breakpoint-large) {
+    display: none;
+  }
+}
+
 .nav__links {
   a {
     font-weight: 700;
+  }
+}
+
+.nav__mobile {
+  display: none;
+}
+
+.nav__mobile.active {
+  padding-bottom: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  @include max-breakpoint($breakpoint-large) {
+    display: flex;
+  }
+}
+
+.nav__mobile .nav__links {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.nav__menu {
+  display: none;
+  width: 3rem;
+  height: 3rem;
+  background: transparent url("hamburger-icon.svg") no-repeat center;
+  background-size: contain;
+
+  @include max-breakpoint($breakpoint-large) {
+    display: inline-block;
+  }
+
+  @include max-breakpoint($breakpoint-small) {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.nav__menu.active {
+  background: transparent url("hamburger-icon-open.svg") no-repeat 0 center;
+  background-size: contain;
+}
+
+.mobile__search {
+  display: none;
+  width: fit-content;
+
+  @include max-breakpoint($breakpoint-large) {
+    display: inline-block;
+  }
+
+  .search {
+    padding: 0;
+  }
+
+  .search__box {
+    padding: 5px 0;
+
+    input {
+      width: 60%;
+    }
   }
 }

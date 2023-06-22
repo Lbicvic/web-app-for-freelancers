@@ -25,7 +25,12 @@ const Search = () => {
           {currentUser && (
             <div className="search__box">
               <i className="" onClick={() => search()}>
-                <img width="30px" height="30px" src={searchLogo} alt="Search Icon" />
+                <img
+                  width="30px"
+                  height="30px"
+                  src={searchLogo}
+                  alt="Search Icon"
+                />
               </i>
               <input
                 type="text"

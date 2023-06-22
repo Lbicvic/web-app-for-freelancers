@@ -6,6 +6,10 @@
   justify-content: center;
 
   padding: 1.5rem 0;
+  
+  @include max-breakpoint($breakpoint-small){
+    padding: 1.5rem;
+  }
 }
 
 .login-form__wrapper,
