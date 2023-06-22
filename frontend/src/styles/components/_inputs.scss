@@ -6,11 +6,11 @@
   width: 100%;
   padding: 0.3125rem;
   border-radius: 0.3125rem;
-  border: 0.0625rem solid $color-light-gray;
-  box-shadow: 0.0625rem 0.0625rem 0.0625rem $color-light-gray;
+  border: 0.0625rem solid $color--secondary--gray;
+  box-shadow: 0.0625rem 0.0625rem 0.0625rem $color--secondary--gray;
 
   &:hover {
-    box-shadow: 0.3125rem 0.3125rem 0.3125rem $color-light-gray;
+    box-shadow: 0.3125rem 0.3125rem 0.3125rem $color--secondary--gray;
   }
 }
 
@@ -27,11 +27,13 @@
 .search__box {
   input {
     width: auto;
-    height: 1.875rem;
+    height: 1.6875rem;
     border: none;
 
-    &:focus {
+    &:focus,
+    &:focus-visible {
       outline: transparent;
+      border-bottom: 0.0625rem solid $color--secondary--gray;
     }
   }
 }

@@ -13,6 +13,7 @@
 .service-form__wrapper {
   @extend .card__layout;
 
+  background-color: $color-white;
   h2 {
     margin: 1rem;
     text-align: center;
@@ -28,4 +29,9 @@
   justify-content: center;
   gap: 1rem;
   padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.form__link{
+  font-weight: 700;
+  font-style: italic;
 }

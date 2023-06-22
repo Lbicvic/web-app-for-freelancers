@@ -8,7 +8,7 @@
 }
 .categories__wrapper {
   @extend .layout;
-  
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 4rem;
@@ -17,9 +17,14 @@
 
 .category__item {
   @extend .card__layout;
-  
+
   max-width: unset !important;
   width: unset !important;
   padding: 1.5rem;
+  background-color: $color-white;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0.3125rem 0.625rem 1.125rem #444;
+  }
 }

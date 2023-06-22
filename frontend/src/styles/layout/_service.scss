@@ -1,5 +1,5 @@
 .service {
-  padding: 1rem 0;
+  padding: 1.5rem 0;
 }
 
 .service__wrapper {
@@ -18,11 +18,20 @@
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
+  background-color: $color-white;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0.3125rem 0.625rem 1.125rem #444;
+  }
 }
 
 .service__content.is-details {
   cursor: default;
+
+  &:hover {
+    box-shadow: 0.3125rem 0.625rem 1.125rem #888;
+  }
 
   .service__picture{
     align-self: center;

@@ -49,7 +49,7 @@ const ServiceDetails = () => {
   };
 
   const hireFreelancer = async () => {
-    if (currentUser._id != service.user_id && currentUser.role == "user") {
+    if (currentUser._id != service.user_id && currentUser.role == "User") {
       const application = {
         hire: "ongoing",
         freelancer_id: service.user_id,
@@ -94,7 +94,7 @@ const ServiceDetails = () => {
               <button onClick={() => deleteService(service._id)}>Delete</button>
             </div>
           )}
-          {currentUser.role == "user" && (
+          {currentUser.role == "User" && (
             <div className="hire-button">
               <button onClick={() => hireFreelancer()}>Hire</button>
             </div>

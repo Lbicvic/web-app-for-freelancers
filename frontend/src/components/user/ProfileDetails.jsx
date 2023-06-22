@@ -31,7 +31,7 @@ const ProfileDetails = () => {
   return (
     <>
       <Header />
-      {owner._id && <Profile user={owner} key={owner._id}/>}
+      {owner._id && <Profile user={owner} key={owner._id} is_profile_details={true}/>}
     </>
   );
 };

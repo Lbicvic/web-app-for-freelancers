@@ -21,13 +21,18 @@ const Service = ({
           <div className="service__wrapper" key={_id}>
             <div className={`service__content ${is_details}`}>
               <h3>{title}</h3>
-              <img className="service__picture" src={picture.url} alt="Service Picture" />
+              <img
+                className="service__picture"
+                src={picture.url}
+                alt="Service Picture"
+              />
               <p>{description}</p>
               <h4>{cost} €</h4>
               {currentUser._id != user_id && (
-                <Link to={`/profileDetails/${user_id}`}>
-                  <p>Owner: {user_name}</p>
-                </Link>
+                <p>
+                  Owner:{" "}
+                  <Link to={`/profileDetails/${user_id}`} className="profile__link">{user_name}</Link>
+                </p>
               )}
             </div>
           </div>

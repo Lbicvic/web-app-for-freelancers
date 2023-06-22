@@ -10,7 +10,7 @@ const Apply = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (currentUser.role == "user") {
+    if (currentUser.role == "User") {
       axios
         .get("http://localhost:3003/api/applications/userApplications", {
           withCredentials: true,
@@ -78,6 +78,26 @@ const Apply = () => {
         console.log(error);
       });
   };
+
+  const completeApplication = (application) => {
+    application.hire = "completed";
+    axios
+      .patch(
+        `http://localhost:3003/api/applications/${application._id}`,
+        JSON.stringify(application),
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((response) => {
+        navigate("/applications");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const deleteApplication = (id) => {
     axios
       .delete(`http://localhost:3003/api/applications/${id}`, {
@@ -111,8 +131,11 @@ const Apply = () => {
                       {application.hire == "ongoing" && (
                         <>
                           <p>
-                            waiting on {application.freelancer_name} to accept
-                            or decline application
+                            waiting on{" "}
+                            <span className="text-italic">
+                              {application.freelancer_name}
+                            </span>{" "}
+                            to accept or decline application
                           </p>
                           <button
                             onClick={() => deleteApplication(application._id)}
@@ -124,17 +147,28 @@ const Apply = () => {
                       {application.hire == "accept" && (
                         <>
                           <p>
-                            {application.freelancer_name} has accepted your
-                            application, please contact freelancer on this email{" "}
-                            {application.freelancer_email}
+                            <span className="text-italic">
+                              {application.freelancer_name}
+                            </span>{" "}
+                            has accepted your application, please contact
+                            freelancer on this email{" "}
+                            <a
+                              href={`mailto:${application.freelancer_email}`}
+                              className="text-italic"
+                            >
+                              {application.freelancer_email}
+                            </a>
                           </p>
                         </>
                       )}
                       {application.hire == "refuse" && (
                         <>
                           <p>
-                            {application.freelancer_name} has refused your
-                            application, please delete this application
+                            <span className="text-italic">
+                              {application.freelancer_name}
+                            </span>{" "}
+                            has refused your application, please delete this
+                            application
                           </p>
                           <div className="application__buttons">
                             <button
@@ -145,6 +179,23 @@ const Apply = () => {
                           </div>
                         </>
                       )}
+                      {application.hire == "completed" && (
+                        <>
+                          <p>
+                            <span className="text-italic">
+                              {application.freelancer_name}
+                            </span>{" "}
+                            has completed this service, if something went wrong,
+                            please contact him again on{" "}
+                            <a
+                              href={`mailto:${application.freelancer_email}`}
+                              className="text-italic"
+                            >
+                              {application.freelancer_email}
+                            </a>
+                          </p>
+                        </>
+                      )}
                     </div>
                   )}
                   {currentUser.role == "Freelancer" && (
@@ -153,8 +204,10 @@ const Apply = () => {
                       {application.hire == "ongoing" && (
                         <>
                           <p>
-                            {application.user_name} wants to hire you for this
-                            service
+                            <span className="text-italic">
+                              {application.user_name}
+                            </span>{" "}
+                            wants to hire you for this service
                           </p>
                           <div className="application__buttons">
                             <button
@@ -173,16 +226,34 @@ const Apply = () => {
                       {application.hire == "accept" && (
                         <>
                           <p>
-                            You have accepted {application.user_name}{" "}
+                            You have accepted{" "}
+                            <span className="text-italic">
+                              {application.user_name}
+                            </span>{" "}
                             application, please contact user on this email{" "}
-                            {application.user_email}
+                            <a
+                              href={`mailto:${application.user_email}`}
+                              className="text-italic"
+                            >
+                              {application.user_email}
+                            </a>
+                            . After completing this service, if user has paid
+                            you, please mark this application as Completed
                           </p>
+                          <button
+                            onClick={() => completeApplication(application)}
+                          >
+                            Completed
+                          </button>
                         </>
                       )}
                       {application.hire == "refuse" && (
                         <>
                           <p>
-                            You have refused {application.user_name}{" "}
+                            You have refused{" "}
+                            <span className="text-italic">
+                              {application.user_name}
+                            </span>{" "}
                             application, please delete this application
                           </p>
                           <div className="application__buttons">
@@ -192,6 +263,31 @@ const Apply = () => {
                               Delete
                             </button>
                           </div>
+                        </>
+                      )}
+                      {application.hire == "completed" && (
+                        <>
+                          <p>
+                            You have completed this service and{" "}
+                            <span className="text-italic">
+                              {application.user_name}
+                            </span>{" "}
+                            has paid you in full, if something went wrong,
+                            please contact user on this email{" "}
+                            <a
+                              href={`mailto:${application.user_email}`}
+                              className="text-italic"
+                            >
+                              {application.user_email}
+                            </a>{" "}
+                            or undo application status
+                          </p>
+                          <button
+                            onClick={() => acceptApplication(application)}
+                            className="text-center"
+                          >
+                            Undo
+                          </button>
                         </>
                       )}
                     </div>

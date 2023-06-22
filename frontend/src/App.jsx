@@ -4,7 +4,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import "./app.scss";
+import "./index.scss";
 import axios from "axios";
 
 import Login from "./pages/Login";

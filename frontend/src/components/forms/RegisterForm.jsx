@@ -34,7 +34,7 @@ const RegisterForm = () => {
       password: passwordRef.current.value,
       role: role,
       profilePic: profilePicture,
-      occupation: occupationRef.current.value,
+      occupation: occupationRef.current ? occupationRef.current.value : " ",
     };
 
     axios
@@ -131,26 +131,32 @@ const RegisterForm = () => {
             />
             <label htmlFor="roleUser">User</label>
           </div>
-          <label htmlFor="occupation">Choose an Occupation:</label>
-          <select
-            name="occupation"
-            id="occupation"
-            className="occupation"
-            ref={occupationRef}
-          >
-            <option value="Frontend Developer">Frontend Developer</option>
-            <option value="Backend Developer">Backend Developer</option>
-            <option value="Fullstack Developer">Fullstack Developer</option>
-            <option value="DevOps Engineer">DevOps Engineer</option>
-            <option value="Android Developer">Android Developer</option>
-            <option value="Flutter Developer">Flutter Developer</option>
-            <option value="iOS Developer">iOS Developer</option>
-            <option value="Software Engineer">Software Engineer</option>
-            <option value="Hardware Engineer">Hardware Engineer</option>
-            <option value="Designer">Designer</option>
-            <option value="Photographer">Photographer</option>
-            <option value="Human Resources Tech">Human Resources Tech</option>
-          </select>
+          {role === "Freelancer" && (
+            <>
+              <label htmlFor="occupation">Choose an Occupation:</label>
+              <select
+                name="occupation"
+                id="occupation"
+                className="occupation"
+                ref={occupationRef}
+              >
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="Backend Developer">Backend Developer</option>
+                <option value="Fullstack Developer">Fullstack Developer</option>
+                <option value="DevOps Engineer">DevOps Engineer</option>
+                <option value="Android Developer">Android Developer</option>
+                <option value="Flutter Developer">Flutter Developer</option>
+                <option value="iOS Developer">iOS Developer</option>
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Hardware Engineer">Hardware Engineer</option>
+                <option value="Designer">Designer</option>
+                <option value="Photographer">Photographer</option>
+                <option value="Human Resources Tech">
+                  Human Resources Tech
+                </option>
+              </select>
+            </>
+          )}
           <label htmlFor="profile">Choose Profile Picture:</label>
           <input
             className="profile-picture"
@@ -166,7 +172,10 @@ const RegisterForm = () => {
           <button type="submit">Register</button>
           {error && <div className="error"> {error} </div>}
           <p>
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account?{" "}
+            <Link to="/login" className="form__link">
+              Log in
+            </Link>
           </p>
         </form>
       </div>

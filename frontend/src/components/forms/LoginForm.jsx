@@ -65,10 +65,10 @@ const LoginForm = () => {
             ref={passwordRef}
             required
           />
-          <button type="submit">Login</button>
+          <button type="submit">Log in</button>
           {error && <div className="error"> {error} </div>}
           <p>
-            Need an account? <Link to="/register">Register</Link>
+            Need an account? <Link to="/register" className="form__link">Register</Link>
           </p>
         </form>
       </div>
