@@ -21,6 +21,7 @@ import UpdateService from "./pages/UpdateService";
 import Applications from "./pages/Applications";
 import SearchedServices from "./components/search/SearchedServices";
 import ProfileDetails from "./components/user/ProfileDetails";
+import Survey from "./components/survey/Survey";
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
@@ -65,6 +66,7 @@ function App() {
           <Route path="/newService" element={<NewService />}></Route>
           <Route path="/applications" element={<Applications />}></Route>
           <Route path="/searchedServices" element={<SearchedServices />}></Route>
+          <Route path="/survey" element={<Survey />}></Route>
         </Routes>
       </Router>
     </>

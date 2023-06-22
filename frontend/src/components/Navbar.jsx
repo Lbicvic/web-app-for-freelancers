@@ -61,6 +61,7 @@ const Navbar = () => {
               )}
               <Link to="/applications"> Applications </Link>
               <Link to="/myProfile"> Profile </Link>
+              <Link to="/survey"> Survey </Link>
             </div>
             <button onClick={handleLogout}>Log out</button>
           </nav>

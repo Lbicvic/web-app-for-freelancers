@@ -1,0 +1,14 @@
+.survey{
+    padding: 1.5rem;
+}
+
+.survey__wrapper {
+  @extend .layout;
+  @extend .card__layout;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-white;
+}
