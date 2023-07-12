@@ -8,6 +8,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
   const [isActive, setIsActive] = useState("");
+
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -15,7 +16,7 @@ const Navbar = () => {
 
   return (
     <header>
-      {!localStorage.getItem("user") && (
+      {!localStorage.getItem("user") && !currentUser && (
         <div className="header__content">
           <div className="header__title">
             <Link to="/">
@@ -30,7 +31,7 @@ const Navbar = () => {
           </nav>
         </div>
       )}
-      {localStorage.getItem("user") && (
+      {localStorage.getItem("user") && currentUser && (
         <div className="header__content">
           <div className="header__title">
             <Link to="/home">
@@ -67,7 +68,7 @@ const Navbar = () => {
           </nav>
         </div>
       )}
-      {localStorage.getItem("user") && (
+      {localStorage.getItem("user") && currentUser && (
         <nav className={`nav__mobile ${isActive}`}>
           <div className="nav__links">
             {JSON.parse(localStorage.getItem("user")).role == "Freelancer" && (
