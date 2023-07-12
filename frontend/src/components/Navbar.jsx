@@ -38,7 +38,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="mobile__search">
-            <Search />
+            {isActive === "active" && <Search />}
           </div>
           <a
             href="http://"
@@ -67,19 +67,21 @@ const Navbar = () => {
           </nav>
         </div>
       )}
-      <nav className={`nav__mobile ${isActive}`}>
-        <div className="nav__links">
-          {JSON.parse(localStorage.getItem("user")).role == "Freelancer" && (
-            <>
-              <Link to="/newService"> Post New Service </Link>
-              <Link to="/myServices"> My Services </Link>
-            </>
-          )}
-          <Link to="/applications"> Applications </Link>
-          <Link to="/myProfile"> Profile </Link>
-        </div>
-        <button onClick={handleLogout}>Log out</button>
-      </nav>
+      {localStorage.getItem("user") && (
+        <nav className={`nav__mobile ${isActive}`}>
+          <div className="nav__links">
+            {JSON.parse(localStorage.getItem("user")).role == "Freelancer" && (
+              <>
+                <Link to="/newService"> Post New Service </Link>
+                <Link to="/myServices"> My Services </Link>
+              </>
+            )}
+            <Link to="/applications"> Applications </Link>
+            <Link to="/myProfile"> Profile </Link>
+          </div>
+          <button onClick={handleLogout}>Log out</button>
+        </nav>
+      )}
     </header>
   );
 };

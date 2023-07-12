@@ -27,7 +27,12 @@ class ApplicationController {
   static async addApplication(req, res) {
     const data = req.body;
     const user = req.user;
-    const serviceData = { ...data, user_id: user._id, user_name: user.firstName.concat(" ",user.lastName), user_email: user.email }
+    const serviceData = {
+      ...data,
+      user_id: user._id,
+      user_name: user.firstName.concat(" ", user.lastName),
+      user_email: user.email,
+    };
     try {
       const application = await ApplicationRepository.save(serviceData);
       res.status(200).json(application);

@@ -213,11 +213,13 @@ const Apply = () => {
                             <button
                               onClick={() => acceptApplication(application)}
                             >
+                              {" "}
                               Accept
                             </button>
                             <button
                               onClick={() => declineApplication(application)}
                             >
+                              {" "}
                               Decline
                             </button>
                           </div>
@@ -243,7 +245,8 @@ const Apply = () => {
                           <button
                             onClick={() => completeApplication(application)}
                           >
-                            Completed
+                            {" "}
+                            Completed{" "}
                           </button>
                         </>
                       )}
@@ -260,7 +263,8 @@ const Apply = () => {
                             <button
                               onClick={() => deleteApplication(application._id)}
                             >
-                              Delete
+                              {" "}
+                              Delete{" "}
                             </button>
                           </div>
                         </>
@@ -286,7 +290,8 @@ const Apply = () => {
                             onClick={() => acceptApplication(application)}
                             className="text-center"
                           >
-                            Undo
+                            {" "}
+                            Undo{" "}
                           </button>
                         </>
                       )}
