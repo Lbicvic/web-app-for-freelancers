@@ -154,7 +154,7 @@ const Survey = () => {
             >
               <p>
                 Based on your recent experiences, how would you describe your
-                first encounter with freelancer/customer?
+                first encounter with a freelancer/customer within our app?
               </p>
               <input
                 className="answer"
