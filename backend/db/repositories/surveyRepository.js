@@ -8,6 +8,11 @@ class SurveyRepository {
       return { error: error.message };
     }
   }
+  static async getSurveys() {
+    const surveys = await Survey.find({}).sort({ createdAt: -1 });
+
+    return { surveys };
+  }
 }
 
 module.exports = SurveyRepository;

@@ -6,5 +6,6 @@ const surveyRouter = express.Router();
 surveyRouter.use(AuthMiddleware.requireAuth);
 
 surveyRouter.post("/", SurveyController.addSurvey);
+surveyRouter.post("/exportToExcel", SurveyController.exportSurveysToExcel);
 
 module.exports = surveyRouter;

@@ -8,6 +8,7 @@ const Survey = () => {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [downloadMessage, setDownloadMessage] = useState("");
 
   const [answer1, setAnswer1] = useState(0);
   const [answer2, setAnswer2] = useState(0);
@@ -38,6 +39,23 @@ const Survey = () => {
       .catch((error) => {
         console.log(error.response.data);
         setError(error.response.data);
+      });
+  }
+
+  async function handleDownload(e) {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:3003/api/survey/exportToExcel", {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        setDownloadMessage("File has been downloaded inside project folder");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        setDownloadMessage(error.response.data);
       });
   }
 
@@ -296,6 +314,20 @@ const Survey = () => {
             <button type="submit">Send</button>
             {error && <div className="error"> {error} </div>}
           </form>
+          {currentUser.email === "admin@gmail.com" && (
+            <>
+              <button
+                type="submit"
+                onClick={handleDownload}
+                className="download-button"
+              >
+                Download
+              </button>
+              {downloadMessage && (
+                <div className="download-message"> {downloadMessage} </div>
+              )}
+            </>
+          )}
           <p>
             Return to{" "}
             <Link to="/home" className="form__link">
